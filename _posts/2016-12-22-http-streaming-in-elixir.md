@@ -7,11 +7,12 @@ date: 2016-12-22 18:00
 
 One of the Elixir web apps we have at Adjust acts as an API gateway — it receives a request, applies authorization and/or authentication and then passes the request along to an actual requested service. As you probably know, if you're building microservices, this approach is quite common. In our case, the API gateway also stands before a service that is responsible for generating reports. These reports are usually big `json` or `csv` blobs and sometimes they are as big as a few hundred megabytes. Because of this, downloading such a report via API gateway just to send it to a client does not sound like a good idea. Below, you can see what happened to our naïve implementation when a number of clients were trying to download sizeable reports.
 
+<!--more-->
+
 ![screenshot](/assets/images/no_streaming.png)
 
 In this blogpost, I'd like to describe how we've implemented transparent streaming of HTTP requests directly to a client.
 
-<!--more -->
 
 In the above screenshot, the "Traffic" graph perfectly illustrates what happens without streaming: an application receives data from a requested service for quite a while (yellow line, "in"), and once all the data is there, it sends it to a client ("out" line). With the streaming approach, there should be no significant gaps between the "in" and "out" lines on this graph, because the API gateway should send a chunk to the client as soon as that chunk is received from the requested service.
 

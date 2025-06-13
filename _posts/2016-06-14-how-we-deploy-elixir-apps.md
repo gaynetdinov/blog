@@ -7,7 +7,7 @@ date: 2016-06-14 11:13
 
 We at adjust recently started to use Elixir. We built a couple of small services using the Phoenix framework which successfully went live. In this blogpost I'd like to talk about, I'd say, the most undiscussed topic when it comes to Elixir — deployment.
 
-<!--more -->
+<!--more-->
 
 Although you can find some blog posts about deploying Elixir applications, usually after reading them, it still remains unclear how to get the desired command which would deploy your code to production - and which would automate all the routines.
 
