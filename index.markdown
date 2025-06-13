@@ -1,6 +1,5 @@
 ---
 layout: default
-title:
 ---
 
 # Big-Elephants no more
